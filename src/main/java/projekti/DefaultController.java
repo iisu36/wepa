@@ -7,9 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DefaultController {
 
-    @GetMapping("*")
+    @GetMapping("/")
     public String helloWorld(Model model) {
-        model.addAttribute("message", "World!");
         return "index";
     }
+    
+    /*@GetMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
+    
+    @GetMapping("/create-user")
+    public String createUser() {
+        return "create-user";
+    }*/
 }
