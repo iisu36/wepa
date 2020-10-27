@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head(title)" lang="en">
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" th:href="@{/public/style.css}"/>
+    </head>
+    <body>
+        
+        <header th:fragment="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-3">
+                        <h1>LINKEDIN</h1>
+                    </div>
+                    
+                    <div class="col-7">
+                        <form class="form-inline" id="search">
+                            <input type='text' class="form-control mt-2" id="searchBar" placeholder='Enter name'/>
+                            <input type='submit' class="btn btn-primary mt-2" value='Find'/>
+                        </form>
+                    </div>
+                    
+                    <div class='col-2 mt-2'>
+                        <a>Me</a>
+                        <a>Requests</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            
+        </main>
+        
+        <footer>
+            
+        </footer>
+    </body>
+</html>

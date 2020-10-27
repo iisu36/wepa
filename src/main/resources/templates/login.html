@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <title>Welcome!</title>
+    </head>
+    <body>
+        <div class="d-flex justify-content-center" style="min-height: 100vh; background-color: wheat">
+
+            <div class="align-self-center mr-5">
+                <h1 class="display-1" style="font-weight: bolder; color:olivedrab ">farmers@</h1>
+                <h3 class="mt-n4 text-right" style="color: olivedrab">...where farmers at.</h3>
+            </div>
+
+            <div class="align-self-center ml-5 py-3 px-3 border rounded-lg" style="background-color: white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
+                <form name="form" method="POST" th:action="@{/login}">
+                    <div class="d-flex flex-column">
+                        <input class="my-1 form-control form-control-lg" type="text" id="username" name="username" placeholder="Username"/>
+                        <input class="my-1 form-control form-control-lg" type="password" id="password" name="password" placeholder="Password" />
+                        <p th:if="${param.error}" class="alert alert-error text-danger">Invalid username and password.</p>
+                        <input class="my-1 btn-primary form-control form-control-lg flex-fill" type="submit" value="Log in"/>
+                    </div>
+                </form>
+                <p class="my-2 text-primary text-center">Forgot password?</p>
+                <button class="my-1 btn btn-lg form-control form-control-lg flex-fill" style="background-color: olivedrab; color: white">Create new account</button>
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+                You have been logged out.
+            </div>
+
+        </div>
+    </body>
+</html>

@@ -22,12 +22,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
  
+        http.csrf().disable();
+        http.headers().frameOptions().sameOrigin();
+        
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers(HttpMethod.GET, "/create-user").permitAll()
+                .antMatchers("/accounts","/accounts/**").permitAll()
+                .antMatchers("/h2-console","/h2-console/**").permitAll()
                 .anyRequest().authenticated();
         http.formLogin()
-                //.loginPage("/login")
+                .loginPage("/login")
+                .permitAll();
+        http.logout()
                 .permitAll();
     }
  

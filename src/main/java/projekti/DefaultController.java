@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DefaultController {
 
     @GetMapping("dry-chamber-49238.herokuapp.com/")
-    public String helloWorld(Model model) {
+    public String herokuhome(Model model) {
         return "home";
     }
     
-    /*@GetMapping("/login")
-    public String login(Model model) {
-        return "login";
+    @GetMapping("/")
+    public String home(Model model) {
+        return "fragments/demo";
     }
     
-    @GetMapping("/create-user")
-    public String createUser() {
-        return "create-user";
-    }*/
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
