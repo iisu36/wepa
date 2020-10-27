@@ -9,7 +9,12 @@ public class DefaultController {
 
     @GetMapping("dry-chamber-49238.herokuapp.com/")
     public String herokuhome(Model model) {
-        return "home";
+        return "fragments/home";
+    }
+    
+    @GetMapping("dry-chamber-49238.herokuapp.com/login")
+    public String herokulogin() {
+        return "login";
     }
     
     @GetMapping("/")
