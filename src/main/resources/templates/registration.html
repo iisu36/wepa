@@ -16,23 +16,17 @@
             </div>
 
             <div class="align-self-center ml-5 py-3 px-3 border rounded-lg" style="background-color: white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
-                <form name="form" method="POST" th:action="@{/login}">
+                <form action="#" th:object="${account}" name="form" method="POST" th:action="@{/registration}">
                     <div class="d-flex flex-column">
-                        <input class="my-1 form-control form-control-lg" type="text" id="username" name="username" placeholder="Username"/>
-                        <input class="my-1 form-control form-control-lg" type="password" id="password" name="password" placeholder="Password" />
-                        <p th:if="${param.error}" class="alert alert-error text-danger">Invalid username and password.</p>
-                        <input class="my-1 btn-primary form-control form-control-lg flex-fill" type="submit" value="Log in"/>
+                        <input class="my-1 form-control form-control-lg" type="text" th:field="*{username}" placeholder="Username"/>
+                        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-error text-danger">Username error</p>
+                        <p th:if="${used != null}" class="alert alert-error text-danger">Username already taken</p>
+                        <input class="my-1 form-control form-control-lg" type="password" th:field="*{password}" placeholder="Password" />
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-error text-danger">Password error</p>
+                        <input class="my-1 btn-primary form-control form-control-lg flex-fill" type="submit" value="Register"/>
                     </div>
                 </form>
-                <p class="my-2 text-primary text-center">Forgot password?</p>
-                <form method="GET" th:action="@{/registration}"> 
-                    <input type="submit" class="my-1 btn btn-lg form-control form-control-lg flex-fill" style="background-color: olivedrab; color: white" value="Create new account" />
-                </form>
             </div>
-            <div th:if="${param.logout}" class="alert alert-success">
-                You have been logged out.
-            </div>
-
         </div>
     </body>
 </html>
