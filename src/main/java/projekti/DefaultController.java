@@ -23,7 +23,7 @@ public class DefaultController {
     }
     
     @GetMapping("/login")
-    public String login() {
+    public String login() {      
         return "login";
     }
 }

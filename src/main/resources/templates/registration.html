@@ -4,29 +4,38 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <title>Welcome!</title>
     </head>
     <body>
-        <div class="d-flex justify-content-center" style="min-height: 100vh; background-color: wheat">
+        <div class="d-flex justify-content-center text-center" style="min-height: 100vh; background-color: wheat">
 
             <div class="align-self-center mr-5">
-                <h1 class="display-1" style="font-weight: bolder; color:olivedrab ">farmers@</h1>
+                <h1 class="display-1" style="font-weight: bolder; color:olivedrab">farmers@</h1>
                 <h3 class="mt-n4 text-right" style="color: olivedrab">...where farmers at.</h3>
             </div>
 
             <div class="align-self-center ml-5 py-3 px-3 border rounded-lg" style="background-color: white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                 <form action="#" th:object="${account}" name="form" method="POST" th:action="@{/registration}">
                     <div class="d-flex flex-column">
-                        <input class="my-1 form-control form-control-lg" type="text" th:field="*{username}" placeholder="Username"/>
-                        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-error text-danger">Username error</p>
+                        <h2 class="my-1" style="font-weight: bolder; color:olivedrab">Create account</h2>
+                        <input class="my-1 form-control form-control-lg" type="text" th:field="*{username}" placeholder="Username" data-toggle="tooltip" data-placement="right" title="Username must contain 5 to 50 characters"/>
+                        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-error text-danger m-n3">Username error</p>
                         <p th:if="${used != null}" class="alert alert-error text-danger">Username already taken</p>
-                        <input class="my-1 form-control form-control-lg" type="password" th:field="*{password}" placeholder="Password" />
-                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-error text-danger">Password error</p>
+                        <input class="my-1 form-control form-control-lg" type="password" th:field="*{password}" placeholder="Password" data-toggle="tooltip" data-placement="right" title="Password must contain 10 to 60 characters"/>
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-error text-danger m-n3">Password error</p>
                         <input class="my-1 btn-primary form-control form-control-lg flex-fill" type="submit" value="Register"/>
                     </div>
                 </form>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();   
+            });
+        </script>
     </body>
 </html>
