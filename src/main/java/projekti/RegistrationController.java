@@ -58,7 +58,12 @@ public class RegistrationController {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setAuthorities(auth);
         accountRepository.save(account);
-        return "redirect:/login";
+        return "redirect:/registered";
+    }
+    
+    @GetMapping("/registered")
+    public String registered() {
+        return "registered";
     }
 
 }

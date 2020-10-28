@@ -23,7 +23,7 @@
                         <h2 class="my-1" style="font-weight: bolder; color:olivedrab">Create account</h2>
                         <input class="my-1 form-control form-control-lg" type="text" th:field="*{username}" placeholder="Username" data-toggle="tooltip" data-placement="right" title="Username must contain 5 to 50 characters"/>
                         <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-error text-danger m-n3">Username error</p>
-                        <p th:if="${used != null}" class="alert alert-error text-danger">Username already taken</p>
+                        <p th:if="${used != null}" class="alert alert-error text-danger m-n3">Username already taken</p>
                         <input class="my-1 form-control form-control-lg" type="password" th:field="*{password}" placeholder="Password" data-toggle="tooltip" data-placement="right" title="Password must contain 10 to 60 characters"/>
                         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-error text-danger m-n3">Password error</p>
                         <input class="my-1 btn-primary form-control form-control-lg flex-fill" type="submit" value="Register"/>
