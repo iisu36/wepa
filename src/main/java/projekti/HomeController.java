@@ -5,6 +5,7 @@
  */
 package projekti;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +17,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     
+    @Autowired
+    private AuthService auth;
+    
     @GetMapping("dry-chamber-49238.herokuapp.com/")
     public String herokuhome(Model model) {
+        model.addAttribute("account", auth.getAccount());
         return "home";
     }
     
     @GetMapping("/")
     public String home(Model model) {
+        model.addAttribute("account", auth.getAccount());
         return "home";
     }
 }
