@@ -18,11 +18,11 @@ public class HomeController {
     
     @GetMapping("dry-chamber-49238.herokuapp.com/")
     public String herokuhome(Model model) {
-        return "fragments/home";
+        return "home";
     }
     
     @GetMapping("/")
     public String home(Model model) {
-        return "fragments/demo";
+        return "home";
     }
 }
