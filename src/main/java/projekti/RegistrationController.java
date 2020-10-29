@@ -20,7 +20,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RegistrationController {
@@ -66,4 +65,33 @@ public class RegistrationController {
         return "registered";
     }
 
+    @GetMapping("dry-chamber-49238.herokuapp.com/registration")
+    public String herokuregistration() {
+        return "registration";
+    }
+
+    @PostMapping("dry-chamber-49238.herokuapp.com/registration")
+    public String herokuregister(@Valid @ModelAttribute Account account, BindingResult bindingResult, Model model) {
+        
+        if(bindingResult.hasErrors()) {
+            return "registration";
+        }
+        
+        if(accountRepository.findByUsername(account.getUsername()) != null) {
+            model.addAttribute("used", "true");
+            return "registration";
+        }
+        
+        List<String> auth = new ArrayList<>();
+        auth.add("LINKER");
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        account.setAuthorities(auth);
+        accountRepository.save(account);
+        return "redirect:dry-chamber-49238.herokuapp.com/registered";
+    }
+    
+    @GetMapping("dry-chamber-49238.herokuapp.com/registered")
+    public String herokuregistered() {
+        return "registered";
+    }
 }
