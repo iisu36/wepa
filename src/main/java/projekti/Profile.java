@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Profile extends AbstractPersistable {
+public class Profile extends AbstractPersistable<Long> {
     
     private String username;
     
@@ -33,11 +33,11 @@ public class Profile extends AbstractPersistable {
     @Basic(fetch = FetchType.LAZY)
     private byte[] photo;
     
-    @ManyToMany
+    //@ManyToMany
     private List<Connection> connections;
     
     private List<Skill> skills;
     
-    @OneToMany(mappedBy = "poster")
+    //@OneToMany(mappedBy = "poster")
     private List<Post> posts;
 }

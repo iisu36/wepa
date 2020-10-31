@@ -27,12 +27,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Connection extends AbstractPersistable {
+public class Connection extends AbstractPersistable<Long> {
     
     private Profile profile;
     
-    @ManyToMany(mappedBy = "connections")
-    private List<Profile> connections;
+    //@ManyToMany(mappedBy = "connections")
+    private List<Profile> connections ;
     
     private String status;
 }

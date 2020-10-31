@@ -22,9 +22,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post extends AbstractPersistable {
+public class Post extends AbstractPersistable<Long> {
     
-    @ManyToOne
+    //@ManyToOne
     private Profile poster;
     
     private LocalDateTime timestamp;

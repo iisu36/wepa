@@ -20,7 +20,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Skill extends AbstractPersistable {
+public class Skill extends AbstractPersistable<Long> {
     
     private String skill;
     
