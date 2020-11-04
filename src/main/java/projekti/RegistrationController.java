@@ -26,6 +26,9 @@ public class RegistrationController {
 
     @Autowired
     private AccountRepository accountRepository;
+    
+    @Autowired
+    private ProfileRepository profileRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -57,6 +60,12 @@ public class RegistrationController {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setAuthorities(auth);
         accountRepository.save(account);
+        
+        Profile profile = new Profile();
+        profile.setUsername(account.getUsername());
+        profile.setAccountId(account.getId());
+        profileRepository.save(profile);
+        
         return "redirect:/registered";
     }
     
@@ -87,6 +96,12 @@ public class RegistrationController {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setAuthorities(auth);
         accountRepository.save(account);
+        
+        Profile profile = new Profile();
+        profile.setUsername(account.getUsername());
+        profile.setAccountId(account.getId());
+        profileRepository.save(profile);
+        
         return "redirect:dry-chamber-49238.herokuapp.com/registered";
     }
     

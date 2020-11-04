@@ -28,6 +28,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 public class Profile extends AbstractPersistable<Long> {
     
+    private Long accountId;
+    
     private String username;
     
     @Lob

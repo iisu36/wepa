@@ -26,7 +26,7 @@ public class MyWallController {
     @GetMapping("/mywall")
     public String mywall(Model model) {
         
-        model.addAttribute("account", auth.getAccount());
+        model.addAttribute("profile", auth.getProfile());
         
         return "mywall";
     }

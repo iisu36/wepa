@@ -22,13 +22,13 @@ public class HomeController {
     
     @GetMapping("dry-chamber-49238.herokuapp.com/")
     public String herokuhome(Model model) {
-        model.addAttribute("account", auth.getAccount());
+        model.addAttribute("profile", auth.getProfile());
         return "home";
     }
     
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("account", auth.getAccount());
+        model.addAttribute("profile", auth.getProfile());
         return "home";
     }
 }

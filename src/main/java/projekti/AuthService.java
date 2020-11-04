@@ -21,8 +21,13 @@ public class AuthService {
     @Autowired
     private AccountRepository accRep;
 
-    public Account getAccount() {
+    @Autowired
+    private ProfileRepository proRep;
+    
+    public Profile getProfile() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return accRep.findByUsername(auth.getName());
+        Account account = accRep.findByUsername(auth.getName());
+        
+        return proRep.findByAccountId(account.getId());
     }
 }
