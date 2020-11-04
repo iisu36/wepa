@@ -10,8 +10,10 @@ package projekti;
  * @author iisakki
  */
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +26,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 public class Post extends AbstractPersistable<Long> {
     
-    //@ManyToOne
+    @ManyToOne
     private Profile poster;
     
     private LocalDateTime timestamp;
@@ -33,7 +35,8 @@ public class Post extends AbstractPersistable<Long> {
     
     private Integer likes;
     
-    private List<Profile> likers;
+    @ManyToMany
+    private List<Profile> likers = new ArrayList<>();
     
-    private List<Post> comments;
+    private Long commentOnId;
 }

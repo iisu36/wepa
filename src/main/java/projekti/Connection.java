@@ -9,6 +9,7 @@ package projekti;
  *
  * @author iisakki
  */
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Basic;
@@ -29,10 +30,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 public class Connection extends AbstractPersistable<Long> {
     
+    @ManyToOne
     private Profile profile;
     
-    //@ManyToMany(mappedBy = "connections")
-    private List<Profile> connections ;
+    @ManyToMany(mappedBy = "connections")
+    private List<Profile> profiles = new ArrayList<>();
     
     private String status;
 }

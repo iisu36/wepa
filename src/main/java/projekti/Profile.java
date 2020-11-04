@@ -9,6 +9,7 @@ package projekti;
  *
  * @author iisakki
  */
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -33,11 +34,12 @@ public class Profile extends AbstractPersistable<Long> {
     @Basic(fetch = FetchType.LAZY)
     private byte[] photo;
     
-    //@ManyToMany
-    private List<Connection> connections;
+    @ManyToMany
+    private List<Connection> connections = new ArrayList<>();
     
-    private List<Skill> skills;
+    @OneToMany
+    private List<Skill> skills = new ArrayList<>();
     
-    //@OneToMany(mappedBy = "poster")
-    private List<Post> posts;
+    @OneToMany(mappedBy = "poster")
+    private List<Post> posts = new ArrayList<>();
 }
