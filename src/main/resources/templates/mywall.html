@@ -63,7 +63,29 @@ and open the template in the editor.
                                 <div class="d-flex flex-column my-3 ml-3 p-3 bg-dark" style="color:white">
                                     <h1 class="text-center" style="color: olivedrab">My Profile:</h1>
                                     <img class="m-3 rounded-circle" src="img_avatar1.png" alt="Tähän tulee kuva" style="width:200px;"/>
-                                    <button class="btn" style="background-color: olivedrab">Change photo</button>
+                                    <button class="btn" style="background-color: olivedrab" data-toggle="modal" data-target="#myModal">Change photo</button>
+                                    <div id="myModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close mr-auto" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Modal Header</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" action="/files" enctype="multipart/form-data">
+                                                        <input class="btn" style="background-color: olivedrab" type="file" name="file" id="file"/><br>
+                                                        <input class="btn mt-1" style="background-color: olivedrab" type="submit" value="Change"/>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <ol class="mt-3">
                                         <li>
                                             <p class="">Trait</p>
@@ -88,5 +110,12 @@ and open the template in the editor.
                             </footer>
                         </div>
 
+                        <script>
+                            $(document).ready(function(){
+                            $("#myBtn").click(function(){
+                            $("#myModal").modal();
+                            });
+                            });
+                        </script>
                     </body>
                     </html>
