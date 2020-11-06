@@ -14,13 +14,6 @@ and open the template in the editor.
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                    <style>
-                        .fakeimg {
-                            width: 200px;
-                            height: 200px;
-                            background: #aaa;
-                        }
-                    </style>
                     </head>
                     <body style="background-color: darkolivegreen">
 
@@ -62,7 +55,8 @@ and open the template in the editor.
 
                                 <div class="d-flex flex-column my-3 ml-3 p-3 bg-dark" style="color:white">
                                     <h1 class="text-center" style="color: olivedrab">My Profile:</h1>
-                                    <img class="m-3 rounded-circle" src="img_avatar1.png" alt="Tähän tulee kuva" style="width:200px;"/>
+                                    <img th:if="!${profile.photo}" class="m-3 rounded-circle" src="img_avatar1.png" alt="Tähän tulee kuva" style="width:200px;"/>
+                                    <img th:src="${profile.photo}" class="m-3 rounded-circle" alt="Menee läpi" style="width:200px;"/>
                                     <button class="btn" style="background-color: olivedrab" data-toggle="modal" data-target="#myModal">Change photo</button>
                                     <div id="myModal" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
@@ -74,7 +68,7 @@ and open the template in the editor.
                                                     <h4 class="modal-title">Modal Header</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" action="/files" enctype="multipart/form-data">
+                                                    <form method="POST" action="/add-photo" enctype="multipart/form-data">
                                                         <input class="btn" style="background-color: olivedrab" type="file" name="file" id="file"/><br>
                                                         <input class="btn mt-1" style="background-color: olivedrab" type="submit" value="Change"/>
                                                     </form>

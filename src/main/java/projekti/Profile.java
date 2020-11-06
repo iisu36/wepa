@@ -33,7 +33,7 @@ public class Profile extends AbstractPersistable<Long> {
     private String username;
     
     @Lob
-    @Basic(fetch = FetchType.LAZY)
+    //@Basic(fetch = FetchType.LAZY)
     private byte[] photo;
     
     @ManyToMany
