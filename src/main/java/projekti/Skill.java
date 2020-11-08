@@ -28,7 +28,7 @@ public class Skill extends AbstractPersistable<Long> {
     
     private String skill;
     
-    private Integer likes;
+    private Integer likes = 0;
     
     @ManyToMany
     private List<Profile> likers = new ArrayList<>();

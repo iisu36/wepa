@@ -53,62 +53,102 @@ and open the template in the editor.
                         <div class="d-flex flex-column min-vh-100">
                             <div class="d-flex wrapper flex-grow-1">
 
-                                <div class="d-flex flex-column my-3 ml-3 p-3 bg-dark" style="color:white">
-                                    <h1 class="text-center" style="color: olivedrab">My Profile:</h1>
-                                    <img th:if="!${profile.photo}" class="m-3 rounded-circle" src="img_avatar1.png" alt="Tähän tulee kuva" style="width:200px;"/>
-                                    <img th:if="${profile.photo}" th:src="@{/mywall/photo}" class="m-3 rounded-circle" alt="Menee läpi" style="width:200px;"/>
-                                    <button class="btn" style="background-color: olivedrab" data-toggle="modal" data-target="#photoModal">Change photo</button>
+                                <div class="d-flex flex-column m-3 p-3 bg-dark rounded" style="color:white">
+                                    <h1 class="text-center" style="color: olivedrab">My Profile</h1>
+                                    <img th:if="!${profile.photo}" class="m-3 rounded-circle" src="img_avatar1.png" alt="Tähän tulee kuva" style="width:150px;"/>
+                                    <img th:if="${profile.photo}" th:src="@{/mywall/photo}" class="m-3 rounded-circle" alt="Menee läpi" style="width:150px;"/>
+                                    <button class="btn mb-4" style="background-color: olivedrab" data-toggle="modal" data-target="#photoModal">Change picture</button>
                                     <div id="photoModal" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
 
                                             <div class="modal-content bg-dark">
 
-                                                <h2 class="modal-title text-center mt-2" style="color: olivedrab">Change profile picture:</h2>
+                                                <h2 class="modal-title text-center mt-2" style="color: olivedrab">Change profile picture</h2>
 
                                                 <div class="modal-body">
                                                     <form method="POST" th:action="@{/mywall/photo}" enctype="multipart/form-data">
                                                         <input class="btn" style="background-color: olivedrab" type="file" name="file" id="file"/><br>
                                                             <input class="btn mt-1" style="background-color: olivedrab" type="submit" value="Change"/>
                                                     </form>
+                                                    <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
                                                 </div>
-
-                                                <button type="button" class="btn btn-danger m-1" data-dismiss="modal">Close</button>
-
                                             </div>
 
                                         </div>
                                     </div>
-                                    <p th:if="${profile.skills.empty}" class="text-center mt-3">No skills yet</p>
-                                    <ol class="mt-3">
-                                        <li th:each="skill : ${profile.skills}">
-                                            <p class="" th:text="${skill.skill}">Skill</p>
-                                        </li>
-                                    </ol>
-                                    <button class="btn" style="background-color: olivedrab" data-toggle="modal" data-target="#skillModal">Add new skill</button>
+                                    <p th:if="${profile.skills.empty}" class="text-center mt-4" style="color: olivedrab">No skills yet</p>
+                                    <h3 th:if="!${profile.skills.empty}" class="text-center" style="color: olivedrab">Skills:</h3>
+                                    <div class="d-flex" th:each="skill : ${profile.skills}">
+                                        <p class="my-2" th:text="${skill.skill}">Skill</p>
+                                        <p class="ml-auto my-2" th:text="${skill.likes}">Likes</p>
+                                        <!--<button class="ml-2 my-1 btn btn-sm font-weight-bold" style="background-color: olivedrab">Like</button>-->
+                                    </div>
+
+                                    <button class="btn mt-4" style="background-color: olivedrab" data-toggle="modal" data-target="#skillModal">Add new skill</button>
                                     <div id="skillModal" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
 
                                             <div class="modal-content bg-dark">
 
-                                                <h2 class="modal-title text-center mt-2" style="color: olivedrab">Add new Skill:</h2>
+                                                <h2 class="modal-title text-center mt-2" style="color: olivedrab">Add new Skill</h2>
 
                                                 <div class="modal-body">
                                                     <form method="POST" th:action="@{/mywall/skill}">
                                                         <input type="text" class="my-1 form-control form-control-lg" placeholder="Skill" name="skillToAdd" />
                                                         <input type="submit" class="my-1 btn-primary form-control form-control-lg" value="Add Skill" />
                                                     </form>
+                                                    <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
                                                 </div>
-
-                                                <button type="button" class="btn btn-danger m-1" data-dismiss="modal">Close</button>
-
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="d-flex flex-fill bg-dark m-3">
+                                <div class="d-flex flex-column flex-fill my-3">
+                                    <div class="d-flex bg-dark mb-3 p-3 rounded">
+                                        <button class="btn flex-fill text-left text-secondary bg-white p-2" >Share my thoughts...</button>
+                                    </div>
+                                    
+                                    <div class="media bg-dark mb-3 p-3 rounded">
+                                        <img src="img_avatar1.png" alt="John Doe" class="mr-3 mt-1 rounded-circle" style="width:45px;">
+                                            <div class="media-body">
+                                                <h4>John Doe <small><i style="color:olivedrab">Posted on February 19, 2016</i></small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                <hr style="background-color:olivedrab">
+                                                    <button class="btn" style="background-color: olivedrab">Like</button>
+                                                    <button class="btn" style="background-color: olivedrab">Comment</button>
+                                                    <hr style="background-color:olivedrab">
+                                                        <div class="media p-3">
+                                                            <img src="img_avatar2.png" alt="Jane Doe" class="mr-3 mt-1 rounded-circle" style="width:45px;">
+                                                                <div class="media-body">
+                                                                    <h4>Jane Doe <small><i style="color:olivedrab">Posted on February 20 2016</i></small></h4>
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                                    <hr style="background-color:olivedrab">
+                                                                        <button class="btn" style="background-color: olivedrab">Like</button>
+                                                                        <button class="btn" style="background-color: olivedrab">Comment</button>
+                                                                </div>
+                                                        </div>  
+                                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="d-flex flex-column bg-dark m-3 p-3 rounded" style="min-width: 250px">
+                                    <div class="d-flex">
+                                        <h3 class="text-center flex-fill" style="color: olivedrab">Connections</h3>
+                                    </div>
+                                    <div class="input-group mt-1">
+                                        <input type="search" class="form-control" placeholder="Search" />
+                                        <div class="input-group-append">
+                                            <button class="btn" type="submit" style="background-color: olivedrab">Search</button>
+                                        </div>
+                                    </div>
+                                    <p th:if="${profile.connections.empty}" class="text-center my-3" style="color: olivedrab">No connections</p>
+                                    <div th:if="!${profile.connections.empty" th:each="connection : ${profile.connections}">
+                                        <p th:text="${connection.username}" style="color: olivedrab"></p>
+                                    </div>
                                 </div>
                             </div>
 
