@@ -116,7 +116,7 @@ public class SearchController {
         proRep.save(current);
         proRep.save(profile);
 
-        return "redirect:/mywall";
+        return "redirect://dry-chamber-49238.herokuapp.com/mywall";
     }   
 
     @GetMapping("/search/")
@@ -198,6 +198,6 @@ public class SearchController {
         proRep.save(current);
         proRep.save(profile);
 
-        return "redirect:/mywall";
+        return "redirect://dry-chamber-49238.herokuapp.com/mywall";
     }
 }

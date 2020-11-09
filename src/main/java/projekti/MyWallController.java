@@ -83,7 +83,7 @@ public class MyWallController {
 
         proRep.save(profile);
 
-        return "redirect:/mywall";
+        return "redirect://dry-chamber-49238.herokuapp.com/mywall";
     }
 
     @GetMapping("dry-chamber-49238.herokuapp.com/mywall/photo")
@@ -105,7 +105,7 @@ public class MyWallController {
 
         proRep.save(profile);
 
-        return "redirect:/mywall";
+        return "redirect://dry-chamber-49238.herokuapp.com/mywall";
     }
     
     @PostMapping("dry-chamber-49238.herokuapp.com/requests/{username}")
@@ -137,7 +137,7 @@ public class MyWallController {
         
         proRep.save(sender);
         
-        return "redirect:/mywall";
+        return "redirect://dry-chamber-49238.herokuapp.com/mywall";
     }
 
     @PostMapping("dry-chamber-49238.herokuapp.com/delete/{username}")
@@ -169,7 +169,7 @@ public class MyWallController {
         
         conRep.delete(connection);
         
-        return "redirect:/mywall";
+        return "redirect://dry-chamber-49238.herokuapp.com/mywall";
     }
 
     @GetMapping("/mywall")
