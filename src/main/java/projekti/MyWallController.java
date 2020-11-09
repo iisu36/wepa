@@ -39,6 +39,138 @@ public class MyWallController {
     
     @Autowired
     private ConnectionRepository conRep;
+    
+    @GetMapping("dry-chamber-49238.herokuapp.com/mywall")
+    public String herokuMywall(Model model) {
+
+        Profile current = auth.getProfile();
+
+        model.addAttribute("profile", current);
+
+        ArrayList<Profile> connections = new ArrayList<>();
+        ArrayList<Profile> requests = new ArrayList<>();
+
+        for (Connection connection : current.getConnections()) {
+
+            if (connection.getStatus().equals("Connected")) {
+
+                if (connection.getReceiver().getUsername().equals(current.getUsername())) {
+                    connections.add(connection.getSender());
+                } else {
+                    connections.add(connection.getReceiver());
+                }
+            }
+            
+            if (connection.getStatus().equals("Pending")) {
+                
+                if (connection.getReceiver().getUsername().equals(current.getUsername())) {
+                    requests.add(connection.getSender());
+                }
+            }
+        }
+
+        model.addAttribute("connections", connections);
+        model.addAttribute("requests", requests);
+
+        return "mywall";
+    }
+
+    @PostMapping("dry-chamber-49238.herokuapp.com/mywall/photo")
+    public String herokuAddPhoto(@RequestParam("file") MultipartFile file) throws IOException {
+        Profile profile = auth.getProfile();
+
+        profile.setPhoto(file.getBytes());
+
+        proRep.save(profile);
+
+        return "redirect:/mywall";
+    }
+
+    @GetMapping("dry-chamber-49238.herokuapp.com/mywall/photo")
+    public ResponseEntity<byte[]> herokuViewPhoto() {
+        Profile profile = auth.getProfile();
+        return new ResponseEntity<>(profile.getPhoto(), HttpStatus.OK);
+    }
+
+    @PostMapping("dry-chamber-49238.herokuapp.com/mywall/skill")
+    public String herokuAddSkill(@RequestParam String skillToAdd) {
+        Profile profile = auth.getProfile();
+
+        Skill skill = new Skill();
+        skill.setSkill(skillToAdd);
+
+        skiRep.save(skill);
+
+        profile.getSkills().add(skill);
+
+        proRep.save(profile);
+
+        return "redirect:/mywall";
+    }
+    
+    @PostMapping("dry-chamber-49238.herokuapp.com/requests/{username}")
+    public String herokuConnect(@PathVariable String username) {
+        
+        Profile current = auth.getProfile();
+        Profile sender = proRep.findByUsername(username);
+        
+        Connection connection = conRep.findBySenderAndReceiver(sender, current);
+        connection.setStatus("Connected");
+        
+        conRep.save(connection);
+        
+        for (Connection conn : current.getConnections()) {
+            if (conn.getSender().equals(sender)) {
+                conn = connection;
+                break;
+            }
+        }
+        
+        proRep.save(current);
+        
+        for (Connection con : sender.getConnections()) {
+            if (con.getReceiver().equals(current)) {
+                con = connection;
+                break;
+            }
+        }
+        
+        proRep.save(sender);
+        
+        return "redirect:/mywall";
+    }
+
+    @PostMapping("dry-chamber-49238.herokuapp.com/delete/{username}")
+    public String herokuDelete(@PathVariable String username) {
+        
+        Profile current = auth.getProfile();
+        Profile sender = proRep.findByUsername(username);
+        
+        Connection connection = conRep.findBySenderAndReceiver(sender, current);
+        
+        
+        for (Connection conn : current.getConnections()) {
+            if (conn.getSender().equals(sender)) {
+                current.getConnections().remove(conn);
+                break;
+            }
+        }
+        
+        proRep.save(current);
+        
+        for (Connection con : sender.getConnections()) {
+            if (con.getReceiver().equals(current)) {
+                sender.getConnections().remove(con);
+                break;
+            }
+        }
+        
+        proRep.save(sender);
+        
+        conRep.delete(connection);
+        
+        return "redirect:/mywall";
+    }
 
     @GetMapping("/mywall")
     public String mywall(Model model) {
