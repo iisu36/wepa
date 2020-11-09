@@ -12,5 +12,7 @@ package projekti;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ConnectionRepository  extends JpaRepository<Connection, Long> {
-    Connection findByProfile(Profile profile);
+    Connection findBySender(Profile sender);
+    Connection findByReceiver(Profile receiver);
+    Connection findBySenderAndReceiver(Profile sender, Profile receiver);
 }

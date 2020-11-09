@@ -31,10 +31,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Connection extends AbstractPersistable<Long> {
     
     @ManyToOne
-    private Profile profile;
+    private Profile sender;
     
-    @ManyToMany(mappedBy = "connections")
-    private List<Profile> profiles = new ArrayList<>();
+    @ManyToOne
+    private Profile receiver;
     
     private String status;
 }
